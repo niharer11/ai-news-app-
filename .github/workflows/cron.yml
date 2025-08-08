@@ -1,0 +1,17 @@
+name: Hourly News Notifier
+
+on:
+  # हर घंटे अपने आप चलता है
+  schedule:
+    - cron: '0 * * * *'
+  
+  # GitHub UI में "Actions" tab से मैन्युअल रूप से चलाने के लिए
+  workflow_dispatch:
+
+jobs:
+  call-url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send request to function URL
+        # -f flag यह सुनिश्चित करता है कि अगर URL से error आए तो workflow फेल हो जाए
+        run: curl -f "https://app--nova-feed-5938fba6.base44.app/api/apps/6894ea683c1340d15938fba6/functions/newsNotifier"
